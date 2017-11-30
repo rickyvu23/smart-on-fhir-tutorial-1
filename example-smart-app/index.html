@@ -39,6 +39,9 @@
 				document.getElementById("medStatementDiv").innerHTML = retString;
 			});
 			patientApi.fetchAll({type:'AllergyIntolerance'}).then(function(response) {
+				document.getElementById("allergyDiv").innerText = JSON.stringify(response);
+				return;
+				
 				var retString = "<table>";
 				response.entry.forEach(function(allObj,idx){
 					retString += "<tr><td>"+allObj.resource.substance.text+"</td></tr>";
