@@ -35,7 +35,7 @@
 	function ready(smart) {
 		if (typeof smart.patient === "object") {
 			var patientApi = smart.patient.api;
-			patientApi.fetchAll({type: 'MedicationStatement'}).then(function(response) {
+			patientApi.fetchAll({type: 'Device'}).then(function(response) {
 				var retString = "<table class='dataTable'>";
 				response.forEach(function(medObj,idx){
 					retString += "<tr><td>"+medObj.medicationCodeableConcept.text+"</td></tr>";
@@ -91,10 +91,8 @@
 			});
 		}
 	}
-	function notReady() {
-		if (window.location.href.indexOf('error') < 0) {
-			document.body.innerText = "Launch first.";
-		}
+	function notReady(response) {
+		document.getElementById("medStatementDiv").innerText = JSON.stringify(response);
 	}
 	FHIR.oauth2.ready(ready, notReady);
 	</script>
