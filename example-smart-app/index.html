@@ -42,6 +42,9 @@
 				});
 				retString += "</table>";
 				document.getElementById("medStatementDiv").innerHTML = retString;
+			}).fail(function () {
+				console.log('Medication Statement error', arguments);
+				//ret.reject();
 			});
 			patientApi.fetchAll({type:'AllergyIntolerance',query:{status:'active'}}).then(function(response) {
 				var retString = "<table class='dataTable'>";
