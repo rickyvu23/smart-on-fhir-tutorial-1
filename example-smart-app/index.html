@@ -65,19 +65,20 @@
                       }
                     }
 			}).then(function(response) {
+				/*
 				document.getElementById("obvDiv").innerText = JSON.stringify(response);
 				return;
-				/*
+				*/
 				var retString = "<table class='dataTable'>";
 				response.forEach(function(obvObj,idx){
 					retString += 
 						"<tr>"+
-							"<td>"+allObj.substance.text+"</td>"+
+							"<td>"+obvObj.code.text+"</td>"+
+							"<td>"+obvObj.valueQuantity.value+" "+obvObj.valueQuantity.unit+"</td>"+
 						"</tr>";
 				});
 				retString += "</table>";
-				document.getElementById("allergyDiv").innerHTML = retString;
-				*/
+				document.getElementById("obvDiv").innerHTML = retString;
 			});
 		}
 	}
