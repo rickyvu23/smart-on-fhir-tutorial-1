@@ -71,11 +71,13 @@
 				*/
 				var retString = "<table class='dataTable'>";
 				response.forEach(function(obvObj,idx){
-					retString += 
-						"<tr>"+
-							"<td>"+obvObj.code.text+"</td>"+
-							"<td>"+obvObj.valueQuantity.value+" "+obvObj.valueQuantity.unit+"</td>"+
-						"</tr>";
+					if (typeof obvObj.valueQuantity === "object") {
+						retString += 
+							"<tr>"+
+								"<td>"+obvObj.code.text+"</td>"+
+								"<td>"+obvObj.valueQuantity.value+" "+obvObj.valueQuantity.unit+"</td>"+
+							"</tr>";
+					}
 				});
 				retString += "</table>";
 				document.getElementById("obvDiv").innerHTML = retString;
