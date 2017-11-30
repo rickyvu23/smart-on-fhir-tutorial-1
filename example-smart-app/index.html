@@ -37,7 +37,7 @@
 				retString += "</table>";
 				document.getElementById("medStatementDiv").innerHTML = retString;
 			});
-			patient.api.fetchAll({type:'AllergyIntolerance'}).then(function(response) {
+			patient.fetchAll({type:'AllergyIntolerance'}).then(function(response) {
 				var retString = "<table>";
 				response.entry.forEach(function(allObj,idx){
 					retString += "<tr><td>"+allObj.resource.substance.text+"</td></tr>";
