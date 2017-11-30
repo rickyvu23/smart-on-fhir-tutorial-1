@@ -4,7 +4,9 @@
 	<meta http-equiv='X-UA-Compatible' content='IE=edge' />
 	<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
 	<title>Example-SMART-App</title>
-
+	<style type="text/css">
+		.dataTable {border:1px solid #000;}	
+	</style>
 	<link rel='stylesheet' type='text/css' href='./src/css/example-smart-app.css'>
 	<link rel='stylesheet' type='text/css' href='./lib/css/cerner-smart-embeddable-lib-1.0.0.min.css'>
 	</head>
@@ -31,15 +33,15 @@
 		if (typeof smart.patient === "object") {
 			var patientApi = smart.patient.api;
 			patientApi.fetchAll({type: 'MedicationStatement'}).then(function(response) {
-				var retString = "<table border=1>";
+				var retString = "<table class='dataTable'>";
 				response.forEach(function(medObj,idx){
 					retString += "<tr><td>"+medObj.medicationCodeableConcept.text+"</td></tr>";
 				});
 				retString += "</table>";
 				document.getElementById("medStatementDiv").innerHTML = retString;
 			});
-			patientApi.fetchAll({type:'AllergyIntolerance'}).then(function(response) {
-				var retString = "<table border=1>";
+			patientApi.fetchAll({type:'AllergyIntolerance',query:{status:'active'}}).then(function(response) {
+				var retString = "<table class='dataTable'>";
 				response.forEach(function(allObj,idx){
 					retString += "<tr><td>"+allObj.substance.text+"</td></tr>";
 				});
