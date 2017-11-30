@@ -8,7 +8,10 @@
 	<link rel='stylesheet' type='text/css' href='./src/css/example-smart-app.css'>
 	<link rel='stylesheet' type='text/css' href='./lib/css/cerner-smart-embeddable-lib-1.0.0.min.css'>
 	</head>
-	<body><div id="responseDiv">Loading...</div></body>
+	<body>
+		<div id="medStatementDiv">Loading meds...</div>
+		<div id="allergyDiv">Loading allergies...</div>
+	</body>
 	<!-- Required JS files to enable this page to embed within an MPage -->
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.26.0/polyfill.min.js'></script>
 	<script src='./lib/js/cerner-smart-embeddable-lib-1.0.0.min.js'></script>
@@ -25,14 +28,24 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script>
 	function ready(smart) {
-		var patient = smart.patient.api.fetchAll({type: 'MedicationStatement'}).then(function(response) {
-			var medString = "<table>";
-			response.forEach(function(medObj,idx){
-				medString += "<tr><td>"+medObj.medicationCodeableConcept.text+"</td></tr>";
+		if (typeof smart.patient === "object") {
+			var patient = smart.patient.api.fetchAll({type: 'MedicationStatement'}).then(function(response) {
+				var retString = "<table>";
+				response.forEach(function(medObj,idx){
+					retString += "<tr><td>"+medObj.medicationCodeableConcept.text+"</td></tr>";
+				});
+				retString += "</table>";
+				document.getElementById("medStatementDiv").innerHTML = retString;
 			});
-			medString += "</table>";
-			document.getElementById("responseDiv").innerHTML = medString;
-		});
+			patient.api.fetchAll({type:'AllergyIntolerance'}).then(function(response) {
+				var retString = "<table>";
+				response.entry.forEach(function(allObj,idx){
+					retString += "<tr><td>"+allObj.resource.substance.text+"</td></tr>";
+				});
+				retString += "</table>";
+				document.getElementById("allergyDiv").innerHTML = retString;
+			});
+		}
 	}
 	function notReady() {
 		if (window.location.href.indexOf('error') < 0) {
