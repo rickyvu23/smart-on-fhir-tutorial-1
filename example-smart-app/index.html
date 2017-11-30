@@ -55,15 +55,21 @@
 				retString += "</table>";
 				document.getElementById("allergyDiv").innerHTML = retString;
 			});
+			var lookbackDate = new Date();
+			lookbackDate.setMonth(lookbackDate.getMonth()-6);
+			var month = (lookbackDate.getMonth()+1 < 10)?"0"+(lookbackDate.getMonth()+1):lookbackDate.getMonth()+1;
+			var date = (lookbackDate.getDate() < 10)?"0"+lookbackDate.getDate():lookbackDate.getDate();
+			var curDateStr = "gt"+currentDate.getFullYear()+"-"+month+"-"+date;
 			patientApi.fetchAll({
 				type: 'Observation',
-                    query: {
-                      code: {
-                        $or: ['http://loinc.org|8302-2', 'http://loinc.org|8462-4',
-                              'http://loinc.org|8480-6', 'http://loinc.org|2085-9',
-                              'http://loinc.org|2089-1', 'http://loinc.org|55284-4']
-                      }
-                    }
+				query: {
+					code: {
+						$or: ['http://loinc.org|8302-2', 'http://loinc.org|8462-4',
+						'http://loinc.org|8480-6', 'http://loinc.org|2085-9',
+						'http://loinc.org|2089-1', 'http://loinc.org|55284-4']
+					},
+					date: curDateStr
+				}
 			}).then(function(response) {
 				/*
 				document.getElementById("obvDiv").innerText = JSON.stringify(response);
