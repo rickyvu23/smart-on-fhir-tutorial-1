@@ -29,7 +29,8 @@
 	<script>
 	function ready(smart) {
 		if (typeof smart.patient === "object") {
-			var patient = smart.patient.api.fetchAll({type: 'MedicationStatement'}).then(function(response) {
+			var patientApi = smart.patient.api;
+			patientApi.fetchAll({type: 'MedicationStatement'}).then(function(response) {
 				var retString = "<table>";
 				response.forEach(function(medObj,idx){
 					retString += "<tr><td>"+medObj.medicationCodeableConcept.text+"</td></tr>";
@@ -37,7 +38,7 @@
 				retString += "</table>";
 				document.getElementById("medStatementDiv").innerHTML = retString;
 			});
-			patient.fetchAll({type:'AllergyIntolerance'}).then(function(response) {
+			patientApi.fetchAll({type:'AllergyIntolerance'}).then(function(response) {
 				var retString = "<table>";
 				response.entry.forEach(function(allObj,idx){
 					retString += "<tr><td>"+allObj.resource.substance.text+"</td></tr>";
