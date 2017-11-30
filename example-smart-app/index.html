@@ -59,7 +59,7 @@
 			lookbackDate.setMonth(lookbackDate.getMonth()-6);
 			var month = (lookbackDate.getMonth()+1 < 10)?"0"+(lookbackDate.getMonth()+1):lookbackDate.getMonth()+1;
 			var date = (lookbackDate.getDate() < 10)?"0"+lookbackDate.getDate():lookbackDate.getDate();
-			var curDateStr = "gt"+currentDate.getFullYear()+"-"+month+"-"+date;
+			var curDateStr = "gt"+lookbackDate.getFullYear()+"-"+month+"-"+date;
 			patientApi.fetchAll({
 				type: 'Observation',
 				query: {
