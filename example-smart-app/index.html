@@ -5,14 +5,15 @@
 	<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
 	<title>Example-SMART-App</title>
 	<style type="text/css">
-		.dataTable {border:1px solid #000;}	
+		.dataTable td {box-sizing:border-box;border:1px solid #000;width:100%;}	
+		.dataDiv {width:100%;margin-bottom:6px;border:1px solid #000;}
 	</style>
 	<link rel='stylesheet' type='text/css' href='./src/css/example-smart-app.css'>
 	<link rel='stylesheet' type='text/css' href='./lib/css/cerner-smart-embeddable-lib-1.0.0.min.css'>
 	</head>
 	<body>
-		<div id="medStatementDiv">Loading meds...</div>
-		<div id="allergyDiv">Loading allergies...</div>
+		<div id="medStatementDiv" class="dataDiv">Loading meds...</div>
+		<div id="allergyDiv" class="dataDiv">Loading allergies...</div>
 	</body>
 	<!-- Required JS files to enable this page to embed within an MPage -->
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.26.0/polyfill.min.js'></script>
@@ -43,7 +44,11 @@
 			patientApi.fetchAll({type:'AllergyIntolerance',query:{status:'active'}}).then(function(response) {
 				var retString = "<table class='dataTable'>";
 				response.forEach(function(allObj,idx){
-					retString += "<tr><td>"+allObj.substance.text+"</td></tr>";
+					retString += 
+						"<tr>"+
+							"<td>"+allObj.substance.text+"</td>"+
+							"<td>"+allObj.status+"</td>"+
+						"</tr>";
 				});
 				retString += "</table>";
 				document.getElementById("allergyDiv").innerHTML = retString;
