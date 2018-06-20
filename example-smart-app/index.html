@@ -77,7 +77,7 @@
 				*/
 				var retString = "<table class='dataTable'>";
 				response.forEach(function(obvObj,idx){
-					if (typeof obvObj.valueQuantity === "object") {
+					if (typeof obvObj.valueQuantity !== "undefined") {
 						retString += 
 							"<tr>"+
 								"<td>"+obvObj.code.text+"</td>"+
