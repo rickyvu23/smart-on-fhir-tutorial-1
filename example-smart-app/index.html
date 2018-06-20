@@ -74,19 +74,28 @@
 					date: curDateStr*/
 				}
 			}).then(function(response) {
-				
+				/*
 				document.getElementById("obvDiv").innerText = JSON.stringify(response);
 				return;
-				
+				*/
+				function handleValueQuantity( qObj, dtTm, txt ) {
+					return "<tr>"+
+								"<td>"+txt+"</td>"+
+								"<td>"+qObj.value+" "+qObj.unit+"</td>"+
+								"<td>"+dtTm+"</td>"+
+							"</tr>";
+				}
 				var retString = "<table class='dataTable'>";
 				response.forEach(function(obvObj,idx){
 					if (typeof obvObj.valueQuantity === "object") {
-						retString += 
-							"<tr>"+
-								"<td>"+obvObj.code.text+"</td>"+
-								"<td>"+obvObj.valueQuantity.value+" "+obvObj.valueQuantity.unit+"</td>"+
-								"<td>"+obvObj.effectiveDateTime+"</td>"+
-							"</tr>";
+						retString += handleValueQuantity( obvObj.valueQuantity, obvObj.effectiveDateTime, obvObj.code.text );
+					}
+					else if (typeof obvObj.component === "object" && obvObj.component.length) {
+						obvObj.component.forEach(function(cObj,idx2) {
+							if (typeof cObj.valueQuantity === "object") {
+								retString += handleValueQuantity( cObj.valueQuantity, obvObj.effectiveDateTime, cObj.code.text );
+							}	
+						});
 					}
 				});
 				retString += "</table>";
