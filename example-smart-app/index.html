@@ -71,10 +71,10 @@
 					date: curDateStr
 				}
 			}).then(function(response) {
-				/*
+				
 				document.getElementById("obvDiv").innerText = JSON.stringify(response);
 				return;
-				*/
+				
 				var retString = "<table class='dataTable'>";
 				response.forEach(function(obvObj,idx){
 					if (typeof obvObj.valueQuantity !== "undefined") {
