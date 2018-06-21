@@ -251,8 +251,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var results;
 	      results = [];
 	      for (k in m) {
-	        v = m[k];
-	        results.push([k, v]);
+			v = m[k];
+			if (k === "_id") {
+				results = [[k, v]];
+				break;
+			}
+			else {
+				results.push([k, v]);
+			}
 	      }
 	      return results;
 	    })()).reduce(fn, acc);
