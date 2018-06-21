@@ -34,6 +34,7 @@
 	<script>
 	function ready(smart) {
 		if (typeof smart.patient === "object") {
+			console.log(smart.patient);
 			var patientApi = smart.patient.api;
 			patientApi.fetchAll({type: 'MedicationStatement'}).then(function(response) {
 				var retString = "<table class='dataTable'>";
