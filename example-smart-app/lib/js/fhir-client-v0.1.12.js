@@ -17226,7 +17226,8 @@ BBClient.ready = function(input, callback, errback){
     var fhirClientParams = {
       serviceUrl: state.provider.url,
       patientId: tokenResponse.patient,
-      encounterId: tokenResponse.encounter
+      encounterId: tokenResponse.encounter,
+	  userId: tokenResponse.user
     };
     
     if (tokenResponse.id_token) {
@@ -17500,9 +17501,11 @@ function FhirClient(p) {
     
     if (p.patientId) {
         client.patient = {};
-	client.encounter = {};
+		client.encounter = {};
+		client.user = {};
         client.patient.id = p.patientId;
-	client.encounter.id = p.encounterId;
+		client.encounter.id = p.encounterId;
+		client.user.id = p.userId;
         client.patient.api = fhir({
             baseUrl: server.serviceUrl,
             auth: auth,
