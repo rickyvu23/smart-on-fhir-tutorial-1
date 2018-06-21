@@ -115,6 +115,7 @@
 			
 			patientApi.fetchAll({type: 'Patient'}).then(function(response) {
 				console.log(response);
+				response = response[0];
 				document.getElementById("demo-name").innerHTML = (response.name && response.name.length && response.name[0].text)?response.name[0].text:"Unknown";
 				document.getElementById("demo-gender").innerHTML = (response.gender)?response.gender.substr(0,1).toUpperCase():"Unknown";
 				document.getElementById("demo-dob").innerHTML = (response.birthDate)?new Date(response.birthDate).formatString("longdatetime"):"&nbsp;";
