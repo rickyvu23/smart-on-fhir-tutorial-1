@@ -140,7 +140,7 @@
 				}
 				for (var i=response.location.length;i--;){
 					var idObj = response.location[i];
-					(idObj.status === "active") && $("#demo-loc").html(idObj.location.display);
+					$("#demo-loc").html(idObj.location.display);
 				}
 				//$("#demo-rfv").html();
 			});
