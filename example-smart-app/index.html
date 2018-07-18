@@ -138,8 +138,10 @@
 					var idObj = response.identifier[i];
 					(idObj.system === "urn:oid:3.3.3.3.3.3") && $("#demo-fin").html(idObj.value);
 				}
-				
-				//$("#demo-loc").html();
+				for (var i=response.location.length;i--;){
+					var idObj = response.location[i];
+					(idObj.status === "active") && $("#demo-loc").html(idObj.location.display);
+				}
 				//$("#demo-rfv").html();
 			});
 			
