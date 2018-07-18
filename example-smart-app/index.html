@@ -116,14 +116,14 @@
 			patientApi.fetchAll({type: 'Patient'}).then(function(response) {
 				console.log(response);
 				response = response[0];
-				$("#demo-name").innerHTML = (response.name && response.name.length && response.name[0].text)?response.name[0].text:"Unknown";
-				$("#demo-gender").innerHTML = (response.gender)?response.gender.substr(0,1).toUpperCase():"Unknown";
-				$("#demo-dob").innerHTML = (response.birthDate)?new Date(response.birthDate).formatString("longdate"):"&nbsp;";
+				$("#demo-name").html((response.name && response.name.length && response.name[0].text)?response.name[0].text:"Unknown");
+				$("#demo-gender").html((response.gender)?response.gender.substr(0,1).toUpperCase():"Unknown");
+				$("#demo-dob").html((response.birthDate)?new Date(response.birthDate).formatString("longdate"):"&nbsp;");
 				//$("#demo-age").innerHTML = "";
 				if (response.identifier && response.identifier.length) {
 					response.identifier.forEach(function(obj,idx){
 						if (obj.system === "urn:oid:1.1.1.1.1.1") {
-							$("#demo-mrn").innerHTML = obj.value;
+							$("#demo-mrn").html(obj.value);
 						}
 					});
 				}
