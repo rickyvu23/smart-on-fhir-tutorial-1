@@ -133,6 +133,14 @@
 			
 			smart.api.fetchAll({type: 'Encounter',query:{"_id":encntr_id}}).then(function(response){
 				console.log(response);
+				response = response[0];
+				for (var i=response.identifier.length;i--;){
+					var idObj = response.identifier[i];
+					(idObj.system === "urn:oid:3.3.3.3.3.3") && $("#demo-fin").html(idObj.value);
+				}
+				
+				//$("#demo-loc").html();
+				//$("#demo-rfv").html();
 			});
 			
 			
