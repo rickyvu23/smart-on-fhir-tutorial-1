@@ -134,6 +134,11 @@
 			smart.api.fetchAll({type: 'Encounter',query:{"_id":encntr_id}}).then(function(response){
 				console.log(response);
 			});
+			
+			
+			patientApi.fetchAll({type: 'Observation',query:{category:$or["vital-signs"]}}).then(function(response) {
+				console.log(response);
+			});
 		}
 	},
 	function (response) {
