@@ -108,10 +108,12 @@
 		return (isNaN(this.getTime()))?"Invalid Date":retVal;
 	};
 		
-	function ready(smart) {
+	FHIR.oauth2.ready(
+	function(smart) {
 		if (typeof smart.patient === "object") {
 			console.log(smart);
 			var patientApi = smart.patient.api;
+			var encntr_id = smart.tokenResponse.encounter;
 			
 			patientApi.fetchAll({type: 'Patient'}).then(function(response) {
 				console.log(response);
@@ -129,16 +131,15 @@
 				}
 			});
 			
-			patientApi.fetchAll({type: 'Encounter'}).then(function(response){
+			smart.api.fetchAll({type: 'Encounter',query:{"_id":encntr_id}}).then(function(response){
 				console.log(response);
 			});
 		}
-	}
-	function notReady(response) {
+	},
+	function (response) {
 		if (window.location.href.indexOf('error') < 0) {
 			document.body.innerText = "Launch first.";
 		}
-	}
-	FHIR.oauth2.ready(ready, notReady);
+	});
 	</script>
 </html>
