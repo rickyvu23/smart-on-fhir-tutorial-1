@@ -195,7 +195,9 @@
 							"</tr>";
 				}
 				var retString = "<table class='dataTable'>";
+				var obvCnt = 0;
 				response.forEach(function(obvObj,idx){
+					obvCnt++;
 					if (typeof obvObj.valueQuantity === "object") {
 						retString += handleValueQuantity( obvObj.valueQuantity, obvObj.effectiveDateTime, obvObj.code.text );
 					}
@@ -208,7 +210,12 @@
 					}
 				});
 				retString += "</table>";
-				$("#obvDiv").html(retString);
+				if (obvCnt > 0) {
+					$("#obvDiv").html(retString);
+				}
+				else {
+					$("#obvDiv").html("No Observations Found");
+				}
 			});
 		}
 	}
