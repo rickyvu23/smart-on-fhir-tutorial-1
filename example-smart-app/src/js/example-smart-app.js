@@ -1,5 +1,5 @@
 
-var extractData = function() {
+function extractData() {
     var ret = $.Deferred();
 
     function onError() {
@@ -8,6 +8,7 @@ var extractData = function() {
     }
 
     function onReady(smart)  {
+	  //checking to make sure this has launch scope
       if (smart.hasOwnProperty('patient')) {
         var patient = smart.patient;
         var pt = patient.read();
@@ -25,6 +26,8 @@ var extractData = function() {
         $.when(pt, obv).fail(onError);
 
         $.when(pt, obv).done(function(patient, obv) {
+		  console.log(patient);
+		  console.log(obv);
           var byCodes = smart.byCodes(obv, 'code');
           var gender = patient.gender;
           var dob = new Date(patient.birthDate);
@@ -142,7 +145,7 @@ function getQuantityValueAndUnit(ob) {
     }
 }
 
-var drawVisualization = function(p) {
+function drawVisualization(p) {
     $('#holder').show();
     $('#loading').hide();
     $('#fname').html(p.fname);
