@@ -24,6 +24,13 @@ function extractData() {
 					  category: 'vital-signs'
                     }
                   });
+		
+        var alg = smart.patient.api.fetchAll({
+                    "type": 'AllergyIntolerance',
+                    "query": {
+                      "status": 'active,confirmed,unconfirmed'
+                    }
+                  });
 
         $.when(pt, obv).fail(onError);
 
